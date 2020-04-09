@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "179543307927",
+    "firebase_url": "https://demooutfitterx-86f8e.firebaseio.com",
+    "project_id": "demooutfitterx-86f8e",
+    "storage_bucket": "demooutfitterx-86f8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179543307927:android:4f1ce3f060d8f9e55f5bd2",
+        "android_client_info": {
+          "package_name": "com.harry.demooutfitterx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179543307927-0psef7se6r24ai3uaakjq3kc83tf0kgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlqaOS4VsYgI74TBZt6lFgNc5xFataFx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179543307927-0psef7se6r24ai3uaakjq3kc83tf0kgq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
