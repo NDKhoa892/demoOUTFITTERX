@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.harry.demooutfitterx.R;
 
 public class LoginActivity extends AppCompatActivity {
-
     Button btnLog, btnReg;
     EditText txtEmail, txtPass;
 
