@@ -1,4 +1,4 @@
-package com.harry.demooutfitterx;
+package com.harry.demooutfitterx.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.harry.demooutfitterx.R;
+import com.harry.demooutfitterx.User;
 
 public class RegisterActivity extends AppCompatActivity {
 

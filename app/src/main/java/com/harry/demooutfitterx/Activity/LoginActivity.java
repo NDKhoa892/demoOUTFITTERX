@@ -1,4 +1,4 @@
-package com.harry.demooutfitterx;
+package com.harry.demooutfitterx.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.harry.demooutfitterx.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
 
     /// FIREBASE
     FirebaseAuth mAuth;
+    DatabaseReference mRef;
+    FirebaseUser mUser;
 
     /// DIALOG
     ProgressDialog mDialog;
@@ -36,7 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //// CHECK IF THERE ALREADY HAVE HAD A USER
-        if (mAuth.getCurrentUser() != null) updateUI();
+        if (mAuth.getCurrentUser() != null) {
+            if (checkFirstTime())
+            {
+                updateUI(MainActivity.class);
+            } else updateUI(UpdateInfoActivity.class);
+        }
     }
 
     @Override
@@ -90,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         mDialog.show();
 
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 /// DISMISS DIALOG
@@ -97,14 +112,50 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     /// CTRL + CLICK TO KNOW =))
-                    updateUI();
+                    if (checkFirstTime() == true)
+                    {
+                        /// CTRL + CLICK TO KNOW =))
+                        updateUI(MainActivity.class);
+                    } else updateUI(UpdateInfoActivity.class);
+
                 } else Toast.makeText(LoginActivity.this, "Login not Successful", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
-    private void updateUI() {
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    private void updateUI(Class activity ) {
+        /// CHANGE ACTIVITY
+        startActivity(new Intent(LoginActivity.this, activity));
         finish();
     }
+
+    /// CHECK IS THIS FIRST TIME
+    public boolean checkFirstTime(){
+         final Boolean[] check = new Boolean[1];
+         check[0] = false;
+
+        /// GET USER AND REF
+        mRef =FirebaseDatabase.getInstance().getReference();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        /// Get Age info from current user
+        if (!mUser.isAnonymous())
+        mRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                /// IF IT IS NOT FIRST TIME : FALSE, ELSE TRUE
+                if (dataSnapshot.child("Age").exists()){
+                    check[0] = true;
+                } else check[0] = false;
+            }
+
+            @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+        });
+
+        return check[0];
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.harry.demooutfitterx;
+package com.harry.demooutfitterx.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.harry.demooutfitterx.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -37,4 +37,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.firebase:firebase-database:19.2.1'
+
+    ////        Number Picker
+    implementation 'com.shawnlin:number-picker:2.4.9'
 }
