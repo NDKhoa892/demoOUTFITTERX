@@ -1,48 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".Activity.RegisterActivity">
 
-    <EditText
-        android:id="@+id/txtName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="64dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fill your information"
+            android:textSize="30sp"
+            android:textColor="@android:color/holo_red_dark"
+            android:gravity="center"
+            android:layout_marginVertical="16dp"/>
 
-    <EditText
-        android:id="@+id/txtPass"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="16dp"/>
+        <!--    TYPE NAME    -->
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"/>
 
-    <Button
-        android:id="@+id/btnReg"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="8dp"
-        android:text="REGISTER"/>
+        <!-- TYPE EMAIL -->
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"/>
 
-</LinearLayout>
+        <!-- TYPE PASSWORD -->
+        <EditText
+            android:id="@+id/txtPass"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"/>
+
+        <!--    TYPE ACTIVE NAME-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:id="@+id/edtActiveName"
+            android:hint="Type your active name"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"/>
+
+        <!--    CHOOSE AGE-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="AGE"
+                android:textSize="40sp"
+                android:layout_weight="3" />
+
+            <com.shawnlin.numberpicker.NumberPicker
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/agePicker"
+                app:np_dividerColor="#1F000000"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <!--    CHOOSE HEIGHT-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="HEIGHT (CM)"
+                android:textSize="40sp"
+                android:gravity="center"
+                android:layout_weight="3" />
+
+            <com.shawnlin.numberpicker.NumberPicker
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:np_dividerColor="#1F000000"
+                android:id="@+id/heightPicker"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <!--    CHOOSE WEIGHT-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="WEIGHT (KG)"
+                android:textSize="40sp"
+                android:gravity="center"
+                android:layout_weight="3"/>
+
+            <com.shawnlin.numberpicker.NumberPicker
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:np_dividerColor="#1F000000"
+                android:id="@+id/weightPicker"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <!--    CHOOSE GENDER-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please choose your gender"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="20dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioSex"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center">
+
+
+            <RadioButton
+                android:id="@+id/radioM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/radioF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Female" />
+
+            <RadioButton
+                android:id="@+id/radioB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bisex" />
+        </RadioGroup>
+
+        <!--    TYPE ADRESS-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please type your adress"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="20dp"/>
+
+        <EditText
+            android:id="@+id/edtAdress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:hint="Type your city's name or adress " />
+
+        <!--    Delivery or not-->
+        <CheckBox
+            android:id="@+id/checkDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="Tick it if you want to delivery" />
+
+        <!--    BUTTON REGISTER    -->
+        <Button
+            android:id="@+id/btnReg"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:text="REGISTER"/>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- USE FOR DESIGN NOTIFICATION -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- IMAGE OF THE NOTIFICATION   -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/logo"/>
+
+    <!--  TITLE AND MESSAGE  -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
+
+        <!--    TITLE    -->
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:textColor="#000000"
+            android:text="TITLE"/>
+
+        <!--    MESSAGE    -->
+        <TextView
+            android:id="@+id/txtMess"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_margin="4dp"
+            android:text="MESSAGE"/>
+        
+    </LinearLayout>
+
+</LinearLayout>

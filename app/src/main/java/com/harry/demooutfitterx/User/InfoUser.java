@@ -1,4 +1,4 @@
-package com.harry.demooutfitterx;
+package com.harry.demooutfitterx.User;
 
 import java.io.Serializable;
 

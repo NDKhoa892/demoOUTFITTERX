@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,12 +22,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.harry.demooutfitterx.R;
-import com.harry.demooutfitterx.User;
+import com.harry.demooutfitterx.User.InfoUser;
+import com.harry.demooutfitterx.User.User;
+import com.shawnlin.numberpicker.NumberPicker;
 
 public class RegisterActivity extends AppCompatActivity {
 
     Button btnReg;
-    EditText txtName, txtEmail, txtPass;
+    EditText txtName, txtEmail, txtPass, edtActiveName, edtAdress;
+    NumberPicker heightPicker, agePicker, weightPicker ;
+    CheckBox deliveryCheck;
+    RadioGroup radioSexGroup;
+    RadioButton radioSexBtn;
 
     ProgressDialog mDialog;
 
@@ -42,6 +51,29 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPass = findViewById(R.id.txtPass);
 
+        ///  USER'S INFO
+        heightPicker = findViewById(R.id.heightPicker);
+        agePicker = findViewById(R.id.agePicker);
+        weightPicker = findViewById(R.id.weightPicker);
+        radioSexGroup = findViewById(R.id.radioSex);
+        edtActiveName = findViewById(R.id.edtActiveName);
+        edtAdress = findViewById(R.id.edtAdress);
+        deliveryCheck = findViewById(R.id.checkDelivery);
+
+        ///  Number Piker library https://github.com/ShawnLin013/NumberPicker
+        ///  Set max min for height picker
+        heightPicker.setMaxValue(300);
+        heightPicker.setMinValue(1);
+
+        ///  Set max min for age pikcer
+        agePicker.setMaxValue(120);
+        agePicker.setMinValue(0);
+
+        ///  Set max min for weight pikcer
+        weightPicker.setMaxValue(200);
+        weightPicker.setMinValue(1);
+
+        ///  DIALOG
         mDialog = new ProgressDialog(this);
 
         ///  GET FIREBASE AUTH
@@ -58,7 +90,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     //// HANDLE REGISTER ACTION
     private void handleRegister() {
-        final String name, email, pass, ava;
+        final String name, email, pass, ava, activeName, address, gender;
+        final long age, weight, height;
+        final boolean deliveryBoolean;
+        final int selectedID;
 
         ///  GET NAME, EMAIL, PASS...
         name = txtName.getText().toString();
@@ -76,7 +111,31 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (pass.length() < 6) {
             Toast.makeText(RegisterActivity.this, "Password must be greater than 6 digits", Toast.LENGTH_SHORT).show();
             return;
+        } else if (edtActiveName.getText().toString().isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (edtAdress.getText().toString().isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Enter Adress", Toast.LENGTH_SHORT).show();
+            return;
+
+            /// ID = -1 is no radio button are checked
+        } else if (radioSexGroup.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(RegisterActivity.this, "Choose Gender", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        /// GET ID OF CHECKED BTN RADIO
+        selectedID = radioSexGroup.getCheckedRadioButtonId();
+        radioSexBtn = findViewById(selectedID);
+
+        ///  GET USER'S INFO
+        activeName = edtActiveName.getText().toString();
+        address = edtAdress.getText().toString();
+        gender = radioSexBtn.getText().toString();
+        age = agePicker.getValue();
+        weight = weightPicker.getValue();
+        height = heightPicker.getValue();
+        deliveryBoolean = deliveryCheck.isChecked();
 
         ///   SHOW DIALOG
         mDialog.setMessage("Creating user please wait...");
@@ -100,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
                     String userId = task.getResult().getUser().getUid();
 
                     /// PUSH ON REALTIME DATABASE
-                    mDatabase.child(userId).setValue(new User(name, email, ava, userId));
+                    mDatabase.child(userId).setValue(new User(name, email, ava, userId, new InfoUser(activeName, address, gender, age, weight, height, deliveryBoolean)));
 
                     /// FINISH ACTIVITY
                     mAuth.signOut();

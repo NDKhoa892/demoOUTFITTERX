@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.harry.demooutfitterx.R;
+import com.harry.demooutfitterx.User.User;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLog, btnReg;
@@ -44,12 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //// CHECK IF THERE ALREADY HAVE HAD A USER
-        if (mAuth.getCurrentUser() != null) {
-            if (checkFirstTime())
-            {
-                updateUI(MainActivity.class);
-            } else updateUI(UpdateInfoActivity.class);
-        }
+        if (mAuth.getCurrentUser() != null) updateUIAndFinish(MainActivity.class);
     }
 
     @Override
@@ -109,52 +106,17 @@ public class LoginActivity extends AppCompatActivity {
                 /// DISMISS DIALOG
                 mDialog.dismiss();
 
-                if (task.isSuccessful()) {
-                    /// CTRL + CLICK TO KNOW =))
-                    if (checkFirstTime() == true)
-                    {
-                        /// CTRL + CLICK TO KNOW =))
-                        updateUI(MainActivity.class);
-                    } else updateUI(UpdateInfoActivity.class);
-
-                } else Toast.makeText(LoginActivity.this, "Login not Successful", Toast.LENGTH_LONG).show();
+                if (task.isSuccessful()) updateUIAndFinish(MainActivity.class);
+                else Toast.makeText(LoginActivity.this, "Login not Successful", Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    private void updateUI(Class activity ) {
-        /// CHANGE ACTIVITY
+    /// CHANGE ACTIVITY AND FINISH THIS
+    private void updateUIAndFinish(Class activity) {
         startActivity(new Intent(LoginActivity.this, activity));
         finish();
-    }
-
-    /// CHECK IS THIS FIRST TIME
-    public boolean checkFirstTime(){
-         final Boolean[] check = new Boolean[1];
-         check[0] = false;
-
-        /// GET USER AND REF
-        mRef =FirebaseDatabase.getInstance().getReference();
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        /// Get Age info from current user
-        if (!mUser.isAnonymous())
-        mRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                /// IF IT IS NOT FIRST TIME : FALSE, ELSE TRUE
-                if (dataSnapshot.child("Age").exists()){
-                    check[0] = true;
-                } else check[0] = false;
-            }
-
-            @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-        });
-
-        return check[0];
     }
 
 }

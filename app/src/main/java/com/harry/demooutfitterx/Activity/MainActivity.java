@@ -15,6 +15,7 @@ import com.harry.demooutfitterx.R;
 public class MainActivity extends AppCompatActivity {
 
     Button btnSignout;
+    Button btnNoti;
 
     /// FIREBASE
     FirebaseAuth mAuth;
@@ -25,9 +26,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnSignout = findViewById(R.id.btnSignout);
+        btnNoti = findViewById(R.id.btnNoti);
 
         /// GET FIREBASE AUTH
         mAuth = FirebaseAuth.getInstance();
+
+        //CLICK BUTTON NOTIFICATION
+        btnNoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /// OPEN NOTIFICATION ACTIVITY
+                updateUI(NotificationActivity.class);
+            }
+        });
 
         /// CLICK BUTTON SIGN OUT
         btnSignout.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /// JUST OPEN ANOTHER ACTIVITY
+    private void updateUI(Class Activity) {
+        startActivity(new Intent(this, Activity));
+    }
+
 
     /// HANDLE SIGN OUT
     private void signOut() {

@@ -1,4 +1,4 @@
-package com.harry.demooutfitterx;
+package com.harry.demooutfitterx.User;
 
 import java.io.Serializable;
 
@@ -7,14 +7,16 @@ public class User implements Serializable {
     private String Email;
     private String Image;
     private String id;
+    private InfoUser infoUser;
 
     public User(){}
 
-    public User(String name, String email, String image, String id) {
+    public User(String name, String email, String image, String id, InfoUser infoUser) {
         this.Name = name;
         this.Email = email;
         this.Image = image;
         this.id = id;
+        this.infoUser = infoUser;
     }
 
     public String getName() {
@@ -33,6 +35,8 @@ public class User implements Serializable {
         return id;
     }
 
+    public InfoUser getInfoUser() { return infoUser; }
+
     public void setName(String name) {
         Name = name;
     }
@@ -49,4 +53,5 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public void setInfoUser(InfoUser infoUser) { this.infoUser = infoUser; }
 }
