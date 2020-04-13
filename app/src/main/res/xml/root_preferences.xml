@@ -1,0 +1,19 @@
+<!-- Use for design settings -->
+<!-- To know more: https://developer.android.com/guide/topics/ui/settings -->
+
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--  Notification switch  -->
+    <SwitchPreferenceCompat
+        app:key="@string/NOTIFICATION_SWITCH_PREF"
+        app:title="Enable notification"
+        app:defaultValue="true"/>
+
+    <!--  Notification's sound settings  -->
+    <Preference
+        app:key="listNotificationSound"
+        app:title="Notification sound"
+        app:summary="Your notification sound" />
+
+</PreferenceScreen>

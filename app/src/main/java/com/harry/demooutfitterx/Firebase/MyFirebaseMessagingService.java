@@ -1,16 +1,16 @@
-/// USE FOR HANDLE MESSAGING SERVICE
-/// MENTION IN MANIFESTS
+/*
+USE FOR HANDLE MESSAGING SERVICE
+MENTION IN MANIFESTS
+*/
 
 package com.harry.demooutfitterx.Firebase;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
+import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -20,8 +20,11 @@ import com.harry.demooutfitterx.R;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    private static final String TAG = "MyFirebaseMessagingService";
 
     @Override
     public void onNewToken(@NonNull String token) {
@@ -32,14 +35,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        /// Handle when receive notification via data event
-        if (remoteMessage.getData().size() > 0) {
-            showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
-        }
+        /// Get settings data
+        /// To know more: https://developer.android.com/guide/topics/ui/settings/use-saved-values
+        SharedPreferences settingsData = PreferenceManager.getDefaultSharedPreferences(this);
 
-        /// Handle when receive notification
-        if (remoteMessage.getNotification() != null) {
-            showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+        /// Check notification settings
+        /// If user want to receive notifications
+        if (settingsData.getBoolean(getString(R.string.NOTIFICATION_SWITCH_PREF), true)) {
+            /// Handle when receive notification via data event
+            if (remoteMessage.getData().size() > 0) {
+                showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+            }
+
+            /// Handle when receive notification
+            if (remoteMessage.getNotification() != null) {
+                showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+            }
         }
     }
 
@@ -61,46 +72,39 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         /// Set intent to show when click notification
         Intent intent = new Intent(this, MainActivity.class);
 
-        /// Chanel ID, use for android Oreo and upper
-        String channelID = "OUTFITTERX_channel";
-
         /// addFlag, to know more: https://medium.com/@janishar.ali/saurabh-patel-b6282e2ceef3
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         /// pendingIntent will grant NotificationManager permission to execute
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        /// Set notification's sound
-        /// TODO: add list of notification's sound
-        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+
+        /// SharedPreference time =))
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.PREFERENCE_FILE_KEY),
+                Context.MODE_PRIVATE
+        );
+
+        /// Get index of saved channel ID
+        int savedChannelID = sharedPreferences.getInt(getString(R.string.RINGTONE_PREFERENCE_KEY), 0);
+        /// Get array of channel ID in arrays.xml
+        final String[] channelID = getResources().getStringArray(R.array.channelID);
+        /// Create array raw ID of notification sound
+        final int[] rawID = {R.raw.pikachuuuuuuu, R.raw.mario_power_up, R.raw.message_tone, R.raw.sneeze, R.raw.tuturu};
 
         /// Create a Notification Builder
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelID)
+        /// To know more: https://developer.android.com/training/notify-user/build-notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelID[savedChannelID])
                 .setSmallIcon(R.drawable.logo) /// Set notification's icon
-                .setSound(uri) /// Set sound
-                .setAutoCancel(true) /// Allow sound to auto cancel
+                .setSound(Uri.parse("android.resource://" + getPackageName() + '/' + rawID[savedChannelID])) /// Set sound
+                .setAutoCancel(true) /// Automatically remove notification when user taps it
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000}) /// Set sound vibration
                 .setOnlyAlertOnce(true) /// Only alert Once
                 .setContentIntent(pendingIntent) /// Set intent it will show when click notification
                 .setContent(getCustomDesign(title, message)); /// Set the design of notification
 
-        /// Manage notification
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        /// Check if android version is Oreo or upper to show notification via NotificationChannel
-        /// For each channel, you can set the and auditory behavior that is applied to all notifications in that channel
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            /// Set channel's ID, name, and importance
-            NotificationChannel notificationChannel = new NotificationChannel(channelID, "OUTFITTERX", notificationManager.IMPORTANCE_HIGH);
-
-            /// Set sound for channel
-            notificationChannel.setSound(uri, null);
-
-            /// Create channel
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-        /// Show the notification
+        /// Show
         notificationManager.notify(0, builder.build());
     }
 }

@@ -1,0 +1,21 @@
+<resources>
+
+    <!--  Array of name of notifications' sound  -->
+    <string-array name="soundsName">
+        <item>pikachuuuuuuu</item>
+        <item>Mario power up</item>
+        <item>Message tone</item>
+        <item>Sneeze</item>
+        <item>Tuturu</item>
+    </string-array>
+
+    <!--  Array of ID of notifications' channel  -->
+    <string-array name="channelID">
+        <item>@string/CHANNEL_DEFAULT_ID</item>
+        <item>@string/CHANNEL_MARIO_ID</item>
+        <item>@string/CHANNEL_MESSAGE_ID</item>
+        <item>@string/CHANNEL_SNEEZE_ID</item>
+        <item>@string/CHANNEL_TUTURU_ID</item>
+    </string-array>
+
+</resources>

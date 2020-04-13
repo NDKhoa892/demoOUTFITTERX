@@ -1,8 +1,5 @@
 package com.harry.demooutfitterx.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +22,9 @@ import com.harry.demooutfitterx.R;
 import com.harry.demooutfitterx.User.InfoUser;
 import com.harry.demooutfitterx.User.User;
 import com.shawnlin.numberpicker.NumberPicker;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,12 +7,12 @@
     android:orientation="vertical"
     tools:context=".Activity.MainActivity">
 
-    <!--  BUTTON NOTIFICATION  -->
+    <!--  BUTTON SETTINGS  -->
     <Button
-        android:id="@+id/btnNoti"
+        android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NOTIFICATION"
+        android:text="SETTINGS"
         android:layout_gravity="center_horizontal" />
 
     <!--  BUTTON PERSONAL PAGE  -->

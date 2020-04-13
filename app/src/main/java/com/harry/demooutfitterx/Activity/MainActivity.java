@@ -1,7 +1,5 @@
 package com.harry.demooutfitterx.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,11 +9,13 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.harry.demooutfitterx.R;
+import com.harry.demooutfitterx.Settings.SettingsActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSignout;
-    Button btnNoti;
+    Button btnSignout, btnSettings;
 
     /// FIREBASE
     FirebaseAuth mAuth;
@@ -25,18 +25,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnSettings = findViewById(R.id.btnSettings);
         btnSignout = findViewById(R.id.btnSignout);
-        btnNoti = findViewById(R.id.btnNoti);
 
         /// GET FIREBASE AUTH
         mAuth = FirebaseAuth.getInstance();
 
-        //CLICK BUTTON NOTIFICATION
-        btnNoti.setOnClickListener(new View.OnClickListener() {
+        //CLICK BUTTON SETTINGS
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /// OPEN NOTIFICATION ACTIVITY
-                updateUI(NotificationActivity.class);
+                /// OPEN SETTINGS ACTIVITY
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
 
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(Class Activity) {
         startActivity(new Intent(this, Activity));
     }
-
 
     /// HANDLE SIGN OUT
     private void signOut() {
