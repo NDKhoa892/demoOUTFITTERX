@@ -13,6 +13,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        /// Set up fragment
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.settingsFrame, new SettingsFragment())

@@ -13,9 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.harry.demooutfitterx.R;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
@@ -24,15 +29,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private static final String TAG = "SettingsFragment";
 
-    private SwitchPreferenceCompat switchNoti;
-    private Preference listNotiSound;
+    private PreferenceCategory notificationGroup;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-        switchNoti = findPreference("switchNotification");
-        listNotiSound = findPreference("listNotificationSound");
+        ///// Notification settings preference
+        SwitchPreferenceCompat switchNoti = findPreference("switchNotification");
+
+        notificationGroup = findPreference("notificationGroup");
+
+        Preference listNotiSound = findPreference("listNotificationSound");
+        SwitchPreferenceCompat topicOrder = findPreference(getString(R.string.TOPIC_ORDER_KEY));
+        SwitchPreferenceCompat topicChats = findPreference(getString(R.string.TOPIC_CHATS_KEY));
+        SwitchPreferenceCompat topicPromotions = findPreference(getString(R.string.TOPIC_PROMOTIONS_KEY));
 
         ///////// [BEGIN  INITIALIZE]
 
@@ -42,10 +53,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         /// Set visible for list of notification's sound depend on switchNotification's condition
         if (settingsData.getBoolean(getString(R.string.NOTIFICATION_SWITCH_PREF), true)) {
-            listNotiSound.setVisible(true);
+            notificationGroup.setVisible(true);
             Log.w(TAG, "onSharedPreferenceChanged: TRUE");
         } else {
-            listNotiSound.setVisible(false);
+            notificationGroup.setVisible(false);
             Log.w(TAG, "onSharedPreferenceChanged: FALSE");
         }
 
@@ -56,23 +67,65 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if ((boolean) newValue) {
-                    listNotiSound.setVisible(true);
-                    Log.w(TAG, "onSharedPreferenceChanged: TRUE");
+                    notificationGroup.setVisible(true);
+                    Log.w(TAG, "Push notification: TRUE");
                 } else {
-                    listNotiSound.setVisible(false);
-                    Log.w(TAG, "onSharedPreferenceChanged: FLASE");
+                    notificationGroup.setVisible(false);
+                    Log.w(TAG, "Push notification: FALSE");
                 }
 
                 return true;
             }
         });
 
-        /// Click
+        /// Click sound settings
         listNotiSound.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 /// Click to know =))
                 handleRingtoneSettings();
+                return true;
+            }
+        });
+
+        ///////            Topics settings
+        /// Topic Order update
+        topicOrder.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if ((Boolean) newValue) {
+                    handleTopicSubscribe(getString(R.string.TOPIC_ORDER_KEY));
+                } else {
+                    handleTopicUnsubscribe(getString(R.string.TOPIC_ORDER_KEY));
+                }
+
+                return true;
+            }
+        });
+
+        /// Topics Chats
+        topicChats.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if ((Boolean) newValue) {
+                    handleTopicSubscribe(getString(R.string.TOPIC_CHATS_KEY));
+                } else {
+                    handleTopicUnsubscribe(getString(R.string.TOPIC_CHATS_KEY));
+                }
+
+                return true;
+            }
+        });
+
+        /// Topics promotions
+        topicPromotions.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if ((Boolean) newValue) {
+                    handleTopicSubscribe(getString(R.string.TOPIC_PROMOTIONS_KEY));
+                } else {
+                    handleTopicUnsubscribe(getString(R.string.TOPIC_PROMOTIONS_KEY));
+                }
 
                 return true;
             }
@@ -173,5 +226,33 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         /// Show dialog
         builder.create().show();
+    }
+
+    /// Handle when subscribe to a topic
+    private void handleTopicSubscribe(final String topic) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful())
+                            Log.e(TAG, "Subscribe topic " + topic + " failed");
+
+                        Log.w(TAG, "Subscribe topic " + topic + " successfully");
+                    }
+                });
+    }
+
+    /// Handle when unsubscribe to a topic
+    private void handleTopicUnsubscribe(final String topic) {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(topic)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful())
+                            Log.e(TAG, "Unsubscribe topic " + topic + " failed");
+
+                        Log.w(TAG, "Unsubscribe topic " + topic + " successfully");
+                    }
+                });
     }
 }

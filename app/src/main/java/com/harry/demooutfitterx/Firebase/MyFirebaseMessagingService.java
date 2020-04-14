@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -39,11 +40,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         /// To know more: https://developer.android.com/guide/topics/ui/settings/use-saved-values
         SharedPreferences settingsData = PreferenceManager.getDefaultSharedPreferences(this);
 
+        Log.w(TAG, "From: " + remoteMessage.getFrom());
+
         /// Check notification settings
         /// If user want to receive notifications
         if (settingsData.getBoolean(getString(R.string.NOTIFICATION_SWITCH_PREF), true)) {
             /// Handle when receive notification via data event
             if (remoteMessage.getData().size() > 0) {
+                Log.w(TAG, "onMessageReceived: " + remoteMessage.getData());
                 showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
             }
 

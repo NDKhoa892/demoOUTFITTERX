@@ -4,16 +4,44 @@
 <PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--  Notification switch  -->
-    <SwitchPreferenceCompat
-        app:key="@string/NOTIFICATION_SWITCH_PREF"
-        app:title="Enable notification"
-        app:defaultValue="true"/>
+    <!--  Group of notification settings  -->
+    <PreferenceCategory
+        app:title="Notification settings">
 
-    <!--  Notification's sound settings  -->
-    <Preference
-        app:key="listNotificationSound"
-        app:title="Notification sound"
-        app:summary="Your notification sound" />
+        <!--  Notification switch  -->
+        <SwitchPreferenceCompat
+            app:key="@string/NOTIFICATION_SWITCH_PREF"
+            app:title="Push notification"
+            app:defaultValue="true"/>
+
+        <!--  Notification group, show when enable notification  -->
+        <PreferenceCategory
+            app:key="notificationGroup"
+            app:title="Set up notification">
+
+            <!--  Notification sound settings  -->
+            <Preference
+                app:key="listNotificationSound"
+                app:title="Notification sound"
+                app:summary="Your notification sound" />
+
+            <!--  Notification topic order  -->
+            <SwitchPreferenceCompat
+                app:key="@string/TOPIC_ORDER_KEY"
+                app:title="Order update"/>
+
+            <!--  Notification topic chat  -->
+            <SwitchPreferenceCompat
+                app:key="@string/TOPIC_CHATS_KEY"
+                app:title="Chats"/>
+
+            <!--  Notification topic promotion  -->
+            <SwitchPreferenceCompat
+                app:key="@string/TOPIC_PROMOTIONS_KEY"
+                app:title="OUTFITTERX promotions"/>
+
+        </PreferenceCategory>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

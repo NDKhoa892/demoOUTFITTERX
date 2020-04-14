@@ -33,4 +33,9 @@
     <!--  SharedPreference's key  -->
     <string name="RINGTONE_PREFERENCE_KEY">ringtoneName</string>
 
+    <!--  Firebase notification topic  -->
+    <string name="TOPIC_ORDER_KEY">topicOrder</string>
+    <string name="TOPIC_CHATS_KEY">topicChats</string>
+    <string name="TOPIC_PROMOTIONS_KEY">topicPromotions</string>
+
 </resources>

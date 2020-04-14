@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "MainActivity";
+
     Button btnSignout, btnSettings;
 
     /// FIREBASE
@@ -48,6 +50,24 @@ public class MainActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
+        //// Use for get user's token, don't delete please
+        /*FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        Log.d(TAG, token);
+                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });*/
     }
 
     /// JUST OPEN ANOTHER ACTIVITY
