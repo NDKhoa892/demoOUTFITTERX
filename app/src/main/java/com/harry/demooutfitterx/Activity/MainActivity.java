@@ -1,6 +1,7 @@
 package com.harry.demooutfitterx.Activity;
 
 import android.app.AlertDialog;
+import android.app.SearchableInfo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
-    Button btnSignout, btnSettings;
+    Button btnSignout, btnSettings, btnPage, btnSearchUser;
 
     /// FIREBASE
     FirebaseAuth mAuth;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSignout = findViewById(R.id.btnSignout);
+        btnPage    = findViewById(R.id.btnPage);
+        btnSearchUser = findViewById(R.id.btnSearchUser);
 
         /// GET FIREBASE AUTH
         mAuth = FirebaseAuth.getInstance();
@@ -39,6 +42,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /// OPEN SETTINGS ACTIVITY
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+        });
+
+        btnPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUI(ProfileUserViewActivity.class);
+            }
+        });
+
+        btnSearchUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUI(SearchUser.class);
             }
         });
 

@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.harry.demooutfitterx.R;
 import com.harry.demooutfitterx.User.InfoUser;
+import com.harry.demooutfitterx.User.PostAndFollow;
 import com.harry.demooutfitterx.User.User;
 import com.shawnlin.numberpicker.NumberPicker;
 
@@ -159,7 +160,9 @@ public class RegisterActivity extends AppCompatActivity {
                     String userId = task.getResult().getUser().getUid();
 
                     /// PUSH ON REALTIME DATABASE
-                    mDatabase.child(userId).setValue(new User(name, email, ava, userId, new InfoUser(activeName, address, gender, age, weight, height, deliveryBoolean)));
+                    mDatabase.child(userId).setValue(new User(name, email, ava, userId,
+                            new InfoUser(activeName, address, gender, age, weight, height, deliveryBoolean),
+                            new PostAndFollow(0,0,0)));
 
                     /// FINISH ACTIVITY
                     mAuth.signOut();

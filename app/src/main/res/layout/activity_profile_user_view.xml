@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+<!--    CIRCLE AVATAR-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avtProfileUserView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp" />
+
+<!--    USER NAME-->
+    <TextView
+        android:id="@+id/userNameProfileUserView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginVertical="5dp"
+        android:gravity="center"
+        android:textSize="35dp" />
+
+<!--    ACTIVE NAME-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:id="@+id/activeNameProfileUserView"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp"/>
+
+<!--    LINEAR LAYOUT TO KEEP IT CONSTRAIN-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/black"
+        android:layout_marginVertical="5dp"
+        android:gravity="center">
+
+<!--        CLICK LINEARLAYOUT THIS FOR OPEN FOLLOWER DIALOG-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/linearFollowerUserView"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="25dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Follower"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:id="@+id/numberFollowerUserView"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <!-- CLICK LINEARLAYOUT THIS FOR OPEN FOLLOWING DIALOG-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/linearFollowingUserView"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="25dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Following"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:id="@+id/numberFollowingUserView"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <!-- CLICK LINEARLAYOUT THIS FOR OPEN POSTS DIALOG-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/linearPostUserView"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="25dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Posts"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:id="@+id/numberPostUserView"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+<!--    ALL POSTS HERE-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerPostUserView"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="25dp"/>
+
+</LinearLayout>

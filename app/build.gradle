@@ -44,4 +44,11 @@ dependencies {
     ////        Number Picker
     ////  https://github.com/ShawnLin013/NumberPicker
     implementation 'com.shawnlin:number-picker:2.4.9'
+
+    //// circle img view
+    //// https://github.com/hdodenhof/CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    //// load image to imgview
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

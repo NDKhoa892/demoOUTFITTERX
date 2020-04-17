@@ -17,12 +17,19 @@
 
     <!--  BUTTON PERSONAL PAGE  -->
     <Button
+        android:id="@+id/btnSearchUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search User"
+        android:layout_gravity="center_horizontal"/>
+
+    <!--  BUTTON PERSONAL PAGE  -->
+    <Button
         android:id="@+id/btnPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PERSONAL PAGE"
         android:layout_gravity="center_horizontal"/>
-
     <!--  BUTTON OUTFITTERX TOOL  -->
     <Button
         android:id="@+id/btnTool"

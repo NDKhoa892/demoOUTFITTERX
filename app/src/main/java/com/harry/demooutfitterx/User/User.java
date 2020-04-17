@@ -8,15 +8,17 @@ public class User implements Serializable {
     private String Image;
     private String id;
     private InfoUser infoUser;
+    private PostAndFollow postAndFollow;
 
     public User(){}
 
-    public User(String name, String email, String image, String id, InfoUser infoUser) {
-        this.Name = name;
-        this.Email = email;
-        this.Image = image;
+    public User(String name, String email, String image, String id, InfoUser infoUser, PostAndFollow postAndFollow) {
+        Name = name;
+        Email = email;
+        Image = image;
         this.id = id;
         this.infoUser = infoUser;
+        this.postAndFollow = postAndFollow;
     }
 
     public String getName() {
@@ -37,6 +39,8 @@ public class User implements Serializable {
 
     public InfoUser getInfoUser() { return infoUser; }
 
+    public PostAndFollow getPostAndFollow() { return postAndFollow; }
+
     public void setName(String name) {
         Name = name;
     }
@@ -54,4 +58,6 @@ public class User implements Serializable {
     }
 
     public void setInfoUser(InfoUser infoUser) { this.infoUser = infoUser; }
+
+    public void setPostAndFollow(PostAndFollow postAndFollow) { this.postAndFollow = postAndFollow; }
 }
