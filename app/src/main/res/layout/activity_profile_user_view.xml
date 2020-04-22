@@ -1,40 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-<!--    CIRCLE AVATAR-->
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/avtProfileUserView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp" />
-
-<!--    USER NAME-->
-    <TextView
-        android:id="@+id/userNameProfileUserView"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginVertical="5dp"
-        android:gravity="center"
-        android:textSize="35dp" />
+        android:background="@color/colorPrimary">
 
-<!--    ACTIVE NAME-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:gravity="center"
-        android:id="@+id/activeNameProfileUserView"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginVertical="10dp"/>
+        <!--  CIRCULAR AVATAR  -->
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/avatar"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="2dp"/>
+
+        <!--  CHANGE AVATAR  -->
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/changeAvatar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_alignBottom="@+id/avatar"
+            android:layout_alignEnd="@id/avatar"
+            android:src="@drawable/ic_plus"
+            app:civ_shadow="true"
+            app:civ_shadow_radius="1dp"/>
+
+        <!--    USER NAME-->
+        <TextView
+            android:id="@+id/userNameProfileUserView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginVertical="5dp"
+            android:text="User name"
+            android:gravity="center"
+            android:textSize="35sp"
+            android:textColor="#ffffff"
+            android:layout_below="@id/avatar"/>
+
+        <!--    ACTIVE NAME-->
+        <TextView
+            android:id="@+id/activeNameProfileUserView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:text="User active name"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="10dp"
+            android:textColor="#ffffff"
+            android:layout_below="@id/userNameProfileUserView"/>
+
+    </RelativeLayout>
 
 <!--    LINEAR LAYOUT TO KEEP IT CONSTRAIN-->
     <LinearLayout
@@ -42,7 +66,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@android:color/black"
-        android:layout_marginVertical="5dp"
+        android:padding="8dp"
         android:gravity="center">
 
 <!--        CLICK LINEARLAYOUT THIS FOR OPEN FOLLOWER DIALOG-->
@@ -53,20 +77,25 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="25dp"
             android:gravity="center">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Follower"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:layout_weight="1"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:id="@+id/numberFollowerUserView"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0"/>
+
         </LinearLayout>
 
         <!-- CLICK LINEARLAYOUT THIS FOR OPEN FOLLOWING DIALOG-->
@@ -81,19 +110,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Following"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:layout_weight="1"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:id="@+id/numberFollowingUserView"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="center
+"               android:text="0"/>
         </LinearLayout>
 
-        <!-- CLICK LINEARLAYOUT THIS FOR OPEN POSTS DIALOG-->
+        <!-- CLICK THIS LINEARLAYOUT FOR OPEN POSTS DIALOG-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -101,21 +132,27 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="25dp"
             android:gravity="center">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Posts"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:layout_weight="1"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:id="@+id/numberPostUserView"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0"/>
+
         </LinearLayout>
+
     </LinearLayout>
 
 <!--    ALL POSTS HERE-->

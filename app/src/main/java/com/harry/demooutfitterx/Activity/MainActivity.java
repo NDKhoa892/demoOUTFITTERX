@@ -1,7 +1,6 @@
 package com.harry.demooutfitterx.Activity;
 
 import android.app.AlertDialog;
-import android.app.SearchableInfo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;

@@ -2,10 +2,10 @@ package com.harry.demooutfitterx.Activity;
 
 import android.os.Bundle;
 
+import com.harry.demooutfitterx.R;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.harry.demooutfitterx.R;
 
 public class SearchUser extends AppCompatActivity {
     @Override

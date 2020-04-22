@@ -1,4 +1,4 @@
-package com.harry.demooutfitterx;
+package com.harry.demooutfitterx.Activity;
 
 import android.app.ProgressDialog;
 import android.net.Uri;
@@ -6,18 +6,18 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.harry.demooutfitterx.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfileGuestViewActivity extends AppCompatActivity {
     public static final String TAG = "ProfileGuestViewActivity";
@@ -32,7 +32,8 @@ public class ProfileGuestViewActivity extends AppCompatActivity {
     TextView txtUserName, txtActiveName, txtFollowing, txtFollower,txtPost;
     LinearLayout linearFollower, linearFollowing, linearPost;
     RecyclerView recyclerViewPost;
-    CircleImageView avatar;
+
+    CircularImageView avatar;
 
     ProgressDialog progressDialog;
 
@@ -51,7 +52,7 @@ public class ProfileGuestViewActivity extends AppCompatActivity {
         txtFollowing    = findViewById(R.id.numberFollowingGuestView);
         txtPost         = findViewById(R.id.numberPostGuestView);
 
-        avatar          = findViewById(R.id.avtProfileGuestView);
+        avatar          = findViewById(R.id.avatar);
 
         linearFollower  = findViewById(R.id.linearFollowerGuestView);
         linearFollowing = findViewById(R.id.linearFollowingGuestView);
