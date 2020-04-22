@@ -15,7 +15,7 @@
         android:text="SETTINGS"
         android:layout_gravity="center_horizontal" />
 
-    <!--  BUTTON PERSONAL PAGE  -->
+    <!--  BUTTON SEARCH USER  -->
     <Button
         android:id="@+id/btnSearchUser"
         android:layout_width="wrap_content"
@@ -30,6 +30,15 @@
         android:layout_height="wrap_content"
         android:text="PERSONAL PAGE"
         android:layout_gravity="center_horizontal"/>
+
+    <!--  BUTTON GUEST PAGE  -->
+    <Button
+        android:id="@+id/btnGUEST"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PERSONAL PAGE"
+        android:layout_gravity="center_horizontal"/>
+
     <!--  BUTTON OUTFITTERX TOOL  -->
     <Button
         android:id="@+id/btnTool"

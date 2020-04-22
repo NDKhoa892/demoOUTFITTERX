@@ -59,4 +59,8 @@ dependencies {
 
     //// Picasso - Load image to imgview
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    ////        PICK AND CROP IMAGE
+    ////    https://github.com/Yalantis/uCrop
+    implementation 'com.github.yalantis:ucrop:2.2.4-native'
 }

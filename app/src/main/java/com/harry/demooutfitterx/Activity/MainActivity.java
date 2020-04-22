@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
-    Button btnSignout, btnSettings, btnPage, btnSearchUser;
+    Button btnSignout, btnSettings, btnPage, btnSearchUser, btnGuest;
 
     /// FIREBASE
     FirebaseAuth mAuth;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btnSignout = findViewById(R.id.btnSignout);
         btnPage    = findViewById(R.id.btnPage);
         btnSearchUser = findViewById(R.id.btnSearchUser);
+        btnGuest    = findViewById(R.id.btnGUEST);
 
         /// GET FIREBASE AUTH
         mAuth = FirebaseAuth.getInstance();
@@ -55,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateUI(SearchUser.class);
+            }
+        });
+        btnGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUI(ProfileGuestViewActivity.class);
             }
         });
 

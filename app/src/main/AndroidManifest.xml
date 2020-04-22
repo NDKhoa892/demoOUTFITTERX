@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.harry.demooutfitterx">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -16,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Activity.ImagePickerActivity"></activity>
-        <activity android:name=".Settings.SettingsActivity" />
+        <activity android:name=".Settings.SettingsActivity"/>
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.ProfileUserViewActivity" />
-        <activity android:name=".Activity.SearchUser"/>
-
+        <activity android:name=".Activity.ProfileGuestViewActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity" />
-
+        <activity android:name=".Activity.MainActivity"
+            tools:ignore="InnerclassSeparator" />
         <service
             android:name=".Firebase.MyFirebaseMessagingService"
             android:exported="false">
@@ -39,24 +36,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <!-- uCrop cropping activity -->
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Design.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-
-        <!-- cache directory file provider paths -->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

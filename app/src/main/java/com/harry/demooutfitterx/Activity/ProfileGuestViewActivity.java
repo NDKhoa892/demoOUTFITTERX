@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -13,11 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.harry.demooutfitterx.R;
-import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileGuestViewActivity extends AppCompatActivity {
     public static final String TAG = "ProfileGuestViewActivity";
@@ -32,8 +34,7 @@ public class ProfileGuestViewActivity extends AppCompatActivity {
     TextView txtUserName, txtActiveName, txtFollowing, txtFollower,txtPost;
     LinearLayout linearFollower, linearFollowing, linearPost;
     RecyclerView recyclerViewPost;
-
-    CircularImageView avatar;
+    CircleImageView avatar;
 
     ProgressDialog progressDialog;
 
@@ -52,12 +53,15 @@ public class ProfileGuestViewActivity extends AppCompatActivity {
         txtFollowing    = findViewById(R.id.numberFollowingGuestView);
         txtPost         = findViewById(R.id.numberPostGuestView);
 
-        avatar          = findViewById(R.id.avatar);
+        avatar          = findViewById(R.id.avtProfileGuestView);
 
         linearFollower  = findViewById(R.id.linearFollowerGuestView);
         linearFollowing = findViewById(R.id.linearFollowingGuestView);
         linearPost      = findViewById(R.id.linearPostGuestView);
 
         recyclerViewPost= findViewById(R.id.recyclerPostGuestView);
+
+        Picasso.get().
+                load("https://firebasestorage.googleapis.com/v0/b/demooutfitterx-86f8e.appspot.com/o/Avatar%2Fman.png?alt=media&token=5ff017bb-aebd-47ab-aca6-1eb090b8be6f").into(avatar);
     }
 }
