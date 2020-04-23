@@ -12,16 +12,18 @@
         android:background="@color/colorPrimary">
 
         <!--  CIRCULAR AVATAR  -->
+
+        <!--    USER NAME-->
+
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/avatar"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
             app:civ_border_color="#ffffff"
-            app:civ_border_width="2dp"/>
+            app:civ_border_width="2dp" />
 
-        <!--    USER NAME-->
         <TextView
             android:id="@+id/userNameProfileGuestView"
             android:layout_width="match_parent"
